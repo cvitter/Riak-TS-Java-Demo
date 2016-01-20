@@ -14,7 +14,10 @@ import com.basho.riak.client.core.query.timeseries.Row;
 
 public class ReadAggregates {
 	public static void main(String[] args) throws UnknownHostException, ExecutionException, InterruptedException, ParseException {
-		
+		// Create the Riak TS client to use to write data to
+		// Update the IP and Port if needed to connect to your cluster
+	    RiakClient client = RiakClient.newClient(8087, "127.0.0.1");
+	    
 		// Start and end date to search on
 		String startDateStr = "19/01/2016 12:30:00.00";
 		String endDateStr = "19/01/2016 12:45:00.00";
@@ -25,11 +28,10 @@ public class ReadAggregates {
 		long startDate = date.getTime();
 		date = sdf.parse(endDateStr);
 		long endDate = date.getTime();
-		
-	    // Riak Client with supplied IP and Port 
-	    RiakClient client = RiakClient.newClient(8087, "127.0.0.1"); 
-	    
+		 
 	    // TS SQL Query - Aggregate count on rows matching WHERE clause
+		// See http://docs.basho.com/riakts/latest/using/aggregate-functions/ for more
+		// information on supported aggregate functions
 		String queryText = "select COUNT(*) from WeatherStationData " +
 				"where time > " + startDate + " and time < " + endDate + " and " +
 				"device = 'Weather Station 0001' and deviceId = 'abc-xxx-001-001'";
@@ -50,17 +52,17 @@ public class ReadAggregates {
 			System.out.println("COUNT(*) Returns: " + rowOut);
 		}
 		
-		// Get the min, avg, and max temperature readings for the same selection of records
+		// TS SQL Query - Get the min, avg, and max temperature readings for the same selection of records
+		// See http://docs.basho.com/riakts/latest/using/aggregate-functions/ for more
+		// information on supported aggregate functions
 		queryText = "select MIN(temperature), AVG(temperature), MAX(temperature) from WeatherStationData " +
 				"where time > " + startDate + " and time < " + endDate + " and " +
 				"device = 'Weather Station 0001' and deviceId = 'abc-xxx-001-001'";
 		System.out.println(queryText);
-		// Send the query to Riak TS
 		query = new Query.Builder(queryText).build();
 		queryResult = client.execute(query);
 		
 		// Iterate of the return rows and print them out to the console
-		rows = null;
 		rows = queryResult.getRowsCopy();
 		for (Row row : rows) {
 			List<Cell> cells = row.getCellsCopy();

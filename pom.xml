@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.basho.riakts</groupId>
   <artifactId>riak-ts-demo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>Riak TS Demo</name>
   <description>Riak TS Demo Java code for 1.1</description>
   <dependencies>

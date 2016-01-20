@@ -13,6 +13,7 @@ public class WriteTo {
 
 	public static void main(String[] args) throws UnknownHostException, ExecutionException, InterruptedException, ParseException {
 		// Create the Riak TS client to use to write data to
+		// Update the IP and Port if needed to connect to your cluster
 	    RiakClient client = RiakClient.newClient(8087, "127.0.0.1"); 
 	    
 	    // Set up the data values with defaults
@@ -22,9 +23,8 @@ public class WriteTo {
 	    double windSpeed = 5.0;
 	    double windDirection = 180.0;
 	    
-	    // Create the starting date and convert it to epoch for TS
+	    // Create the starting date and convert it to epoch (long) for TS
 	    String startDateStr = "19/01/2016 11:30:00.00";
-	    // Convert string formats to epoch for TS
 	 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SS");
 	 	Date date = sdf.parse(startDateStr);
 	 	long startDate = date.getTime();
@@ -37,6 +37,8 @@ public class WriteTo {
 			if (i % 10 == 0) windSpeed += 0.1;
 			
 			// Create the row to write to Riak TS
+			// See http://docs.basho.com/riakts/latest/using/writingdata/ for more information
+			// on writing data to Riak TS using the time series Row and Cell classes
 		    List<Row> rows = Arrays.asList(
 		      new Row(
 		        new Cell("Weather Station 0001"), 

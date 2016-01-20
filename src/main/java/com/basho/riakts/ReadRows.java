@@ -14,7 +14,10 @@ import com.basho.riak.client.core.query.timeseries.Row;
 
 public class ReadRows {
 	public static void main(String[] args) throws UnknownHostException, ExecutionException, InterruptedException, ParseException {
-		
+		// Create the Riak TS client to use to write data to
+		// Update the IP and Port if needed to connect to your cluster
+		RiakClient client = RiakClient.newClient(8087, "127.0.0.1"); 
+			    
 		// Start and end date to search on
 		String startDateStr = "19/01/2016 12:30:00.00";
 		String endDateStr = "19/01/2016 12:45:00.00";
@@ -26,10 +29,11 @@ public class ReadRows {
 		date = sdf.parse(endDateStr);
 		long endDate = date.getTime();
 		
-	    // Riak Client with supplied IP and Port 
-	    RiakClient client = RiakClient.newClient(8087, "127.0.0.1"); 
-	    
-	    // TS SQL Query
+	    // TS SQL Query - explicitly selects all of the columns in the table
+		// for a given time range, note that you must include a time range as well
+		// as the device and deviceId in this query as they are a part of the
+		// table's primary key. See http://docs.basho.com/riakts/latest/using/querying/
+		// for more information about querying TS.
 		String queryText = "select device, deviceId, time, temperature, humidity, " +
 				"pressure, windSpeed, windDirection from WeatherStationData " +
 				"where time > " + startDate + " and time < " + endDate + " and " +
@@ -39,6 +43,8 @@ public class ReadRows {
 		// Send the query to Riak TS
 		Query query = new Query.Builder(queryText).build();
 		QueryResult queryResult = client.execute(query);
+		
+		// Output the number of rows returned to the console
 		System.out.println("Total Rows Returned: " + queryResult.getRowsCount() );
 		
 		// Iterate of the return rows and print them out to the console

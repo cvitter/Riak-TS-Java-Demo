@@ -10,9 +10,12 @@ import com.basho.riak.client.core.query.timeseries.QueryResult;
 public class CreateTable {
 	public static void main(String[] args) throws UnknownHostException, ExecutionException, InterruptedException {
 		// Create the Riak TS client to use to write data to
+		// Update the IP and Port if needed to connect to your cluster
 	    RiakClient client = RiakClient.newClient(8087, "127.0.0.1"); 
 
 	    // Table Create Statement for the rest of the examples
+	    // See http://docs.basho.com/riakts/latest/using/creating-activating/ for
+	    // more information on table creation in Riak TS
 	    String queryText = "CREATE TABLE WeatherStationData " + 
 	    		"( " +
 	    			"device 			varchar   	not null, " +
@@ -29,6 +32,7 @@ public class CreateTable {
 	    			") " +
 	    		")";
 
+	    // Create and Execute the Query object against the Riak Client
 	    Query query = new Query.Builder(queryText).build();
 		QueryResult queryResult = client.execute(query);
 		if (queryResult.getRowsCount() == 0)  System.out.println("Table Created Successfully");
