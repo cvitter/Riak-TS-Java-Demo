@@ -41,7 +41,7 @@ public class ReadAggregates {
 		Query query = new Query.Builder(queryText).build();
 		QueryResult queryResult = client.execute(query);
 		
-		// Iterate of the return rows and print them out to the console
+		// Iterate over the returned rows and print them out to the console
 		List<Row> rows = queryResult.getRowsCopy();
 		for (Row row : rows) {
 			List<Cell> cells = row.getCellsCopy();
@@ -62,7 +62,7 @@ public class ReadAggregates {
 		query = new Query.Builder(queryText).build();
 		queryResult = client.execute(query);
 		
-		// Iterate of the return rows and print them out to the console
+		// Iterate over the returned rows and print them out to the console
 		rows = queryResult.getRowsCopy();
 		for (Row row : rows) {
 			List<Cell> cells = row.getCellsCopy();

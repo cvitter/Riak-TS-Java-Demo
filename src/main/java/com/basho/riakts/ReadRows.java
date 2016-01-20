@@ -47,7 +47,7 @@ public class ReadRows {
 		// Output the number of rows returned to the console
 		System.out.println("Total Rows Returned: " + queryResult.getRowsCount() );
 		
-		// Iterate of the return rows and print them out to the console
+		// Iterate over the returned rows and print them out to the console
 		List<Row> rows = queryResult.getRowsCopy();
 		for (Row row : rows) {
 			List<Cell> cells = row.getCellsCopy();
