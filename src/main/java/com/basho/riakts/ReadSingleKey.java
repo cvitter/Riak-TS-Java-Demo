@@ -3,7 +3,6 @@ package com.basho.riakts;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
