@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
 import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.api.commands.timeseries.Query;
 import com.basho.riak.client.core.query.timeseries.Cell;
@@ -53,36 +54,12 @@ public class ReadRows {
 			List<Cell> cells = row.getCellsCopy();
 			String rowOut = "";
 			for (Cell cell : cells) {
-				rowOut += getCellStringVal(cell) + " | ";
+				rowOut += Utility.getCellStringVal(cell) + " | ";
 			}
 			System.out.println(rowOut);
 		}
 		
 	    client.shutdown();
 	}
-	
-	
-	// Convert cell values to string for output
-	private static String getCellStringVal(Cell cell) {
-		if (cell.hasBoolean()) {
-			return Boolean.toString(cell.getBoolean());
-		}
-		else if (cell.hasDouble()) {
-			return String.valueOf(cell.getDouble());
-		}
-		else if (cell.hasLong()) {
-			return String.valueOf(cell.getLong());
-		}
-		else if (cell.hasTimestamp()) {
-			Date out = new Date(cell.getTimestamp()); 
-			return out.toString();
-		}
-		else if (cell.hasVarcharValue()) {
-			return cell.getVarcharAsUTF8String();
-		}
-		else {
-			return null;
-		}	
-	}
-	
+
 }

@@ -47,7 +47,7 @@ public class ReadAggregates {
 			List<Cell> cells = row.getCellsCopy();
 			String rowOut = "";
 			for (Cell cell : cells) {
-				rowOut += getCellStringVal(cell);
+				rowOut += Utility.getCellStringVal(cell);
 			}
 			System.out.println("COUNT(*) Returns: " + rowOut);
 		}
@@ -69,43 +69,19 @@ public class ReadAggregates {
 			int cellNo = 0;
 			for (Cell cell : cells) {
 				if (cellNo==0) {
-					System.out.println("Miniumum Temp: " + getCellStringVal(cell));
+					System.out.println("Miniumum Temp: " + Utility.getCellStringVal(cell));
 				}
 				else if (cellNo==1) {
-					System.out.println("Average Temp: " + getCellStringVal(cell));
+					System.out.println("Average Temp: " + Utility.getCellStringVal(cell));
 				}
 				else if (cellNo==2) {
-					System.out.println("Maximum Temp: " + getCellStringVal(cell));
+					System.out.println("Maximum Temp: " + Utility.getCellStringVal(cell));
 				}
 				cellNo++;
 			}
 		}
 		
 	    client.shutdown();
-	}
-	
-	
-	// Convert cell values to string for output
-	private static String getCellStringVal(Cell cell) {
-		if (cell.hasBoolean()) {
-			return Boolean.toString(cell.getBoolean());
-		}
-		else if (cell.hasDouble()) {
-			return String.valueOf(cell.getDouble());
-		}
-		else if (cell.hasLong()) {
-			return String.valueOf(cell.getLong());
-		}
-		else if (cell.hasTimestamp()) {
-			Date out = new Date(cell.getTimestamp()); 
-			return out.toString();
-		}
-		else if (cell.hasVarcharValue()) {
-			return cell.getVarcharAsUTF8String();
-		}
-		else {
-			return null;
-		}	
 	}
 	
 }
