@@ -17,7 +17,8 @@ public class DescribeTable {
 		// Update the IP and Port if needed to connect to your cluster
 	    RiakClient client = RiakClient.newClient(8087, "127.0.0.1");
 	    
-	    //
+	    // Verify the creation of the table using DESCRIBE
+	    // http://docs.basho.com/riakts/latest/using/creating-activating/#Verification-via-Client-Library
 		String queryText = "DESCRIBE WeatherStationData";
 		System.out.println(queryText);
 		
