@@ -9,8 +9,9 @@ There are six seperate class files in this intial release:
 1. CreateTable.java - Creates and activates the WeatherStationData table in your Riak TS cluster. Running this class more than once will return the following error: "Failed to create table WeatherStationData: already_active".
 2. WriteTo.java - Writes a set of records to the WeatherStationData table.
 3. ReadRows.java - Reads a range of records (based on a time range) and outputs the rows and columns to the console.
-4. ReadAggregates.java - Reads a range of records (based on a time range) and outputs the total count of rows in the range and min, max, and average values of the temparture field.
-5. ReadSingleKey.java - Reads one record using the record's primary key.
-6. Utility.java - Helper class
+4. ReadAggregates.java - Reads a range of records (based on a time range) and outputs the total count of rows in the range and min, max, and average values of the temperature field.
+5. ReadArithmetic.java - Reads a range of records (based on a time range) and outputs the results of arithmetic operations on three columns (temperature, pressure, and windSpeed)
+6. ReadSingleKey.java - Reads one record using the record's primary key.
+7. Utility.java - Helper class
 
 Please submit PRs and Issues.
