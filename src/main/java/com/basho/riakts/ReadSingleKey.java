@@ -3,6 +3,7 @@ package com.basho.riakts;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -29,17 +30,20 @@ public class ReadSingleKey {
 		Fetch fetch = new Fetch.Builder("WeatherStationData", keyCells).build();
 		QueryResult queryResult = client.execute(fetch);
 		
-		// Write the result set to the console
-		List<Row> rows = queryResult.getRowsCopy();
-		for (Row row : rows) {
-			List<Cell> cells = row.getCellsCopy();
+		// Get Iterator from QueryResult
+		Iterator<Row> rows = queryResult.iterator();
+		while (rows.hasNext()) {
+			Row row = (Row) rows.next();
+			
+			Iterator<Cell> cells = row.iterator();
 			String rowOut = "";
-			for (Cell cell : cells) {
-				rowOut += Utility.getCellStringVal(cell) + " | ";
+			while (cells.hasNext()) {
+				Cell cell = (Cell) cells.next();
+				rowOut += Utility.getCellStringVal( cell ) + " | ";
 			}
+
 			System.out.println(rowOut);
 		}
-		
 	    client.shutdown();
 	}
 

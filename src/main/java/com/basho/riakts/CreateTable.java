@@ -8,7 +8,7 @@ import com.basho.riak.client.api.commands.timeseries.Query;
 import com.basho.riak.client.core.query.timeseries.QueryResult;
 
 public class CreateTable {
-	public static void main(String[] args) throws UnknownHostException, ExecutionException, InterruptedException {
+	public static void main(String[] args) throws UnknownHostException {
 		// Create the Riak TS client to use to write data to
 		// Update the IP and Port if needed to connect to your cluster
 	    RiakClient client = RiakClient.newClient(8087, "127.0.0.1"); 
@@ -34,8 +34,12 @@ public class CreateTable {
 
 	    // Create and Execute the Query object against the Riak Client
 	    Query query = new Query.Builder(queryText).build();
-		QueryResult queryResult = client.execute(query);
-		if (queryResult.getRowsCount() == 0)  System.out.println("Table Created Successfully");
+		try {
+			QueryResult queryResult = client.execute(query);
+			System.out.println("Table Created Successfully");
+		} catch (Exception e) {
+			System.out.println("Table Creation Failed: " + e.getMessage());
+		}
 		
 	    client.shutdown();
 	}

@@ -4,8 +4,10 @@ import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
 import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.api.commands.timeseries.Query;
 import com.basho.riak.client.core.query.timeseries.Cell;
@@ -42,12 +44,15 @@ public class ReadAggregates {
 		QueryResult queryResult = client.execute(query);
 		
 		// Iterate over the returned rows and print them out to the console
-		List<Row> rows = queryResult.getRowsCopy();
-		for (Row row : rows) {
-			List<Cell> cells = row.getCellsCopy();
+		Iterator<Row> rows = queryResult.iterator();
+		while (rows.hasNext()) {
+			Row row = (Row) rows.next();
+			
+			Iterator<Cell> cells = row.iterator();
 			String rowOut = "";
-			for (Cell cell : cells) {
-				rowOut += Utility.getCellStringVal(cell);
+			while (cells.hasNext()) {
+				Cell cell = (Cell) cells.next();
+				rowOut += Utility.getCellStringVal( cell );
 			}
 			System.out.println("COUNT(*) Returns: " + rowOut);
 		}
@@ -63,11 +68,14 @@ public class ReadAggregates {
 		queryResult = client.execute(query);
 		
 		// Iterate over the returned rows and print them out to the console
-		rows = queryResult.getRowsCopy();
-		for (Row row : rows) {
-			List<Cell> cells = row.getCellsCopy();
+		rows = queryResult.iterator();
+		while (rows.hasNext()) {
+			Row row = (Row) rows.next();
+			
+			Iterator<Cell> cells = row.iterator();
 			int cellNo = 0;
-			for (Cell cell : cells) {
+			while (cells.hasNext()) {
+				Cell cell = (Cell) cells.next();
 				if (cellNo==0) {
 					System.out.println("Miniumum Temp: " + Utility.getCellStringVal(cell));
 				}
@@ -80,7 +88,6 @@ public class ReadAggregates {
 				cellNo++;
 			}
 		}
-		
 	    client.shutdown();
 	}
 	

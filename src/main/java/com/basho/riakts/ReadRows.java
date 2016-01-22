@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -45,20 +46,20 @@ public class ReadRows {
 		Query query = new Query.Builder(queryText).build();
 		QueryResult queryResult = client.execute(query);
 		
-		// Output the number of rows returned to the console
-		System.out.println("Total Rows Returned: " + queryResult.getRowsCount() );
-		
-		// Iterate over the returned rows and print them out to the console
-		List<Row> rows = queryResult.getRowsCopy();
-		for (Row row : rows) {
-			List<Cell> cells = row.getCellsCopy();
+		// Get Iterator from QueryResult
+		Iterator<Row> rows = queryResult.iterator();
+		while (rows.hasNext()) {
+			Row row = (Row) rows.next();
+			
+			Iterator<Cell> cells = row.iterator();
 			String rowOut = "";
-			for (Cell cell : cells) {
-				rowOut += Utility.getCellStringVal(cell) + " | ";
+			while (cells.hasNext()) {
+				Cell cell = (Cell) cells.next();
+				rowOut += Utility.getCellStringVal( cell ) + " | ";
 			}
+
 			System.out.println(rowOut);
 		}
-		
 	    client.shutdown();
 	}
 

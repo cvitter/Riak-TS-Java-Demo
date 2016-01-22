@@ -2,6 +2,7 @@ package com.basho.riakts;
 
 import java.net.UnknownHostException;
 import java.text.ParseException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -25,16 +26,20 @@ public class DescribeTable {
 		// Send the query to Riak TS
 		Query query = new Query.Builder(queryText).build();
 		QueryResult queryResult = client.execute(query);
-		
-		List<Row> rows = queryResult.getRowsCopy();
 		System.out.println("    Column Name    |     Type    |   Allow Null");
 		System.out.println("----------------------------------------------------------------------------------");
-		for (Row row : rows) {
-			List<Cell> cells = row.getCellsCopy();
+
+		Iterator rows = queryResult.iterator();
+		while (rows.hasNext()) {
+			Row row = (Row) rows.next();
+			
+			Iterator<Cell> cells = row.iterator();
 			String rowOut = "";
-			for (Cell cell : cells) {
-				if (cell != null) rowOut += Utility.getCellStringVal(cell) + "\t\t";
+			while (cells.hasNext()) {
+				Cell cell = (Cell) cells.next();
+				if ( cell != null) rowOut += Utility.getCellStringVal( cell ) + "\t\t";
 			}
+
 			System.out.println(rowOut);
 		}
 	    client.shutdown();
