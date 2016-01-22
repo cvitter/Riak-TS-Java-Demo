@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.api.commands.timeseries.Query;
 import com.basho.riak.client.core.query.timeseries.Cell;
+import com.basho.riak.client.core.query.timeseries.ColumnDescription;
 import com.basho.riak.client.core.query.timeseries.QueryResult;
 import com.basho.riak.client.core.query.timeseries.Row;
 
@@ -26,10 +27,12 @@ public class DescribeTable {
 		// Send the query to Riak TS
 		Query query = new Query.Builder(queryText).build();
 		QueryResult queryResult = client.execute(query);
+		
+		// Write the output of the DESCRIBE command
 		System.out.println("    Column Name    |     Type    |   Allow Null");
 		System.out.println("----------------------------------------------------------------------------------");
 
-		Iterator rows = queryResult.iterator();
+		Iterator<Row> rows = queryResult.iterator();
 		while (rows.hasNext()) {
 			Row row = (Row) rows.next();
 			
@@ -39,9 +42,19 @@ public class DescribeTable {
 				Cell cell = (Cell) cells.next();
 				if ( cell != null) rowOut += Utility.getCellStringVal( cell ) + "\t\t";
 			}
-
 			System.out.println(rowOut);
 		}
+		System.out.println("");
+		
+		// getColumnDescriptionsCopy - a list of column names and their data types
+		List<ColumnDescription> cd = queryResult.getColumnDescriptionsCopy();
+		Iterator<ColumnDescription> cds = cd.iterator();
+		while (cds.hasNext()) {
+			ColumnDescription desc = cds.next();
+			System.out.println("Column Name: " + desc.getName() + "   - Data Type: " + desc.getType());
+		}
+		
+		
 	    client.shutdown();
 	}
 	
