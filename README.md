@@ -4,7 +4,7 @@ Sample Java code that demonstrates how to use the Java client to work with Riak 
 # What This Code Does
 The code in this sample application is designed to demonstrate how to use the current Riak Java client (https://github.com/basho/riak-java-client) to interact with Riak TS and the features in the 1.1 release (http://docs.basho.com/riakts/latest/releasenotes/). 
 
-There are nice separate class files in this initial release:
+There are ten separate class files in this initial release:
 
 1. CreateTable.java - Creates and activates the WeatherStationData table in your Riak TS cluster. Running this class more than once will return the following error: "Failed to create table WeatherStationData: already_active".
 2. DescribeTable.java - Returns the schema of the table if it has been created.
@@ -14,6 +14,7 @@ There are nice separate class files in this initial release:
 6. ReadArithmetic.java - Reads a range of records (based on a time range) and outputs the results of arithmetic operations on three columns (temperature, pressure, and windSpeed)
 7. ReadSingleKey.java - Reads one record using the record's primary key.
 8. DeleteSingleKey.java - Deletes one record using the record's primary key.
-9. Utility.java - Helper class
+9. ListAllKeys.java - List all of the primary keys for the WeatherStationData table. WARNING: Listing all keys is an expensive operation and should not be done in production.
+10. Utility.java - Helper class
 
 Please submit PRs and Issues.

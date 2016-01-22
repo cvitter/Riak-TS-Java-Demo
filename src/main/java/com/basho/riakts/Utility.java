@@ -22,10 +22,13 @@ public class Utility {
 			return String.valueOf(cell.getLong());
 		}
 		else if (cell.hasTimestamp()) {
-			Date out = new Date(cell.getTimestamp());
-			// Output both the epoch and human readable data format
-			return cell.getTimestamp() + " | " + out.toString();
+			return String.valueOf(cell.getTimestamp());
 		}
+//		else if (cell.hasTimestamp()) {
+//			Date out = new Date(cell.getTimestamp());
+//			// Output both the epoch and human readable data format
+//			return cell.getTimestamp() + " | " + out.toString();
+//		}
 		else if (cell.hasVarcharValue()) {
 			return cell.getVarcharAsUTF8String();
 		}
