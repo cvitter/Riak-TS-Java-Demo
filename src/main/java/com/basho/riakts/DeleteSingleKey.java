@@ -18,7 +18,7 @@ import com.basho.riak.client.core.query.timeseries.Cell;
  * http://docs.basho.com/riakts/latest/developing/java/
  * 
  * Note: This example uses the WeatherStationData table created in
- * CreateTable.java and the data written in WriteTo.hava however attempting to delete a key
+ * CreateTable.java and the data written in WriteTo.java however attempting to delete a key
  * that doesn't exist will not throw an error
  */
 public class DeleteSingleKey {

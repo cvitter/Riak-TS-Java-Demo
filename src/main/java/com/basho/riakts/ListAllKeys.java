@@ -23,9 +23,7 @@ import com.basho.riak.client.core.query.timeseries.Row;
  * http://docs.basho.com/riakts/latest/developing/java/
  * 
  * Note: This example uses the WeatherStationData table created in
- * CreateTable.java and the data written in WriteTo.hava. The code will not fail
- * if that code hasn't been successfully executed against your Riak TS cluster first 
- * however no date will be returned in the QueryResult object.
+ * CreateTable.java and the data written in WriteTo.java.
  */
 public class ListAllKeys {
 	public static void main(String[] args) throws UnknownHostException, ExecutionException, InterruptedException, ParseException {

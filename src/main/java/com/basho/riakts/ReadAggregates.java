@@ -10,8 +10,7 @@ package com.basho.riakts;
  * http://docs.basho.com/riakts/latest/developing/java/
  * 
  * Note: This example uses the WeatherStationData table created in
- * CreateTable.java and the data written in WriteTo.hava and will fail if 
- * that code hasn't been successfully executed against your Riak TS cluster first.
+ * CreateTable.java and the data written in WriteTo.java.
  */
 import java.net.UnknownHostException;
 import java.text.ParseException;
