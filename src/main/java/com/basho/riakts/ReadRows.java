@@ -15,6 +15,18 @@ import com.basho.riak.client.core.query.timeseries.ColumnDescription;
 import com.basho.riak.client.core.query.timeseries.QueryResult;
 import com.basho.riak.client.core.query.timeseries.Row;
 
+/***
+ * ReadRows
+ * @author cvitter
+ * Demonstrates the basics of querying Riak TS.
+ * 
+ * For more information see the Java Client API documentation at: 
+ * http://docs.basho.com/riakts/latest/developing/java/
+ * 
+ * Note: This example uses the WeatherStationData table created in
+ * CreateTable.java and the data written in WriteTo.hava and will fail if 
+ * that code hasn't been successfully executed against your Riak TS cluster first.
+ */
 public class ReadRows {
 	public static void main(String[] args) throws UnknownHostException, ExecutionException, InterruptedException, ParseException {
 		// Create the Riak TS client to use to write data to
@@ -33,14 +45,20 @@ public class ReadRows {
 		long endDate = date.getTime();
 		
 	    // TS SQL Query - explicitly selects all of the columns in the table
-		// for a given time range, note that you must include a time range as well
-		// as the device and deviceId in this query as they are a part of the
-		// table's primary key. See http://docs.basho.com/riakts/latest/using/querying/
+		// for a given time range
+		// Note: You must include a time range as well as the device and deviceId in 
+		// this query as they are a part of the table's primary key. 
+		// See http://docs.basho.com/riakts/latest/using/querying/
 		// for more information about querying TS.
 		String queryText = "select device, deviceId, time, temperature, humidity, " +
 				"pressure, windSpeed, windDirection from WeatherStationData " +
 				"where time > " + startDate + " and time < " + endDate + " and " +
 				"device = 'Weather Station 0001' and deviceId = 'abc-xxx-001-001'";
+		
+		// Note: The SQL query below is identical to the query above in the results returned
+//		String queryText = "select * from WeatherStationData " +
+//				"where time > " + startDate + " and time < " + endDate + " and " +
+//				"device = 'Weather Station 0001' and deviceId = 'abc-xxx-001-001'";
 		System.out.println(queryText);
 		
 		// Send the query to Riak TS

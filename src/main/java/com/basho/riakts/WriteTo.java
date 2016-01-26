@@ -9,6 +9,20 @@ import com.basho.riak.client.api.commands.timeseries.Store;
 import com.basho.riak.client.core.query.timeseries.*;
 import java.util.*;
 
+/***
+ * WriteTo
+ * @author cvitter
+ * Demonstrates how to use the Riak TS Store object to write new records.
+ * This example writes 1,000 records, subtly changing the values as
+ * the records get written to make the data more interesting.
+ * 
+ * For more information see the Java Client API documentation at: 
+ * http://docs.basho.com/riakts/latest/developing/java/
+ * 
+ * Note: This example uses the WeatherStationData table created in
+ * CreateTable.java and will fail if that code hasn't been successfully
+ * executed against your Riak TS cluster first.
+ */
 public class WriteTo {
 
 	public static void main(String[] args) throws UnknownHostException, ExecutionException, InterruptedException, ParseException {
@@ -29,6 +43,7 @@ public class WriteTo {
 	 	Date date = sdf.parse(startDateStr);
 	 	long startDate = date.getTime();
 	    
+	 	// Simple for loop to write 1000 to create and write 1000 records
 	    for (int i = 0; i < 1001; i++) {
 	    	// Change the reading values over time to make the data interesting
 	    	if (i % 10 == 0) temp += 0.1;
@@ -56,7 +71,7 @@ public class WriteTo {
 		    Store storeCmd = new Store.Builder("WeatherStationData").withRows(rows).build(); 
 		    client.execute(storeCmd); 
 		    System.out.println("Line written: " + i);
-		    // Add 10 seconds to startDate for the next record
+		    // Add 10 (10 * 1000 milliseconds) seconds to startDate for the next record
 		    startDate += 10000; 
 	    }
 	    client.shutdown();

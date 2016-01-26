@@ -7,6 +7,13 @@ import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.api.commands.timeseries.Query;
 import com.basho.riak.client.core.query.timeseries.QueryResult;
 
+/***
+ * CreateTable.java
+ * @author cvitter
+ * Demonstrates how to create a table in Riak TS via the Java Client API
+ * For more information see the Java Client API documentation at: 
+ * http://docs.basho.com/riakts/latest/developing/java/
+ */
 public class CreateTable {
 	public static void main(String[] args) throws UnknownHostException {
 		// Create the Riak TS client to use to write data to
@@ -18,10 +25,10 @@ public class CreateTable {
 	    // more information on table creation in Riak TS
 	    String queryText = "CREATE TABLE WeatherStationData " + 
 	    		"( " +
-	    			"device 			varchar   	not null, " +
-	    			"deviceId			varchar   	not null, " +
-	    			"time        		timestamp 	not null, " +
-	    			"temperature 		double		not null, " +
+	    			"device 		varchar   	not null, " +
+	    			"deviceId		varchar   	not null, " +
+	    			"time        	timestamp 	not null, " +
+	    			"temperature 	double		not null, " +
 	    			"humidity 		double, " +
 	    			"pressure 		double, " +
 	    			"windSpeed 		double, " +

@@ -1,5 +1,18 @@
 package com.basho.riakts;
 
+/***
+ * ReadAggregates
+ * @author cvitter
+ * Demonstrates the basics of querying Riak TS using aggregates
+ * like COUNT, MIN, AVG, and MAX.
+ * 
+ * For more information see the Java Client API documentation at: 
+ * http://docs.basho.com/riakts/latest/developing/java/
+ * 
+ * Note: This example uses the WeatherStationData table created in
+ * CreateTable.java and the data written in WriteTo.hava and will fail if 
+ * that code hasn't been successfully executed against your Riak TS cluster first.
+ */
 import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

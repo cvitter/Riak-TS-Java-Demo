@@ -7,7 +7,7 @@ The code in this sample application is designed to demonstrate how to use the cu
 There are ten separate class files in this initial release:
 
 1. CreateTable.java - Creates and activates the WeatherStationData table in your Riak TS cluster. Running this class more than once will return the following error: "Failed to create table WeatherStationData: already_active".
-2. DescribeTable.java - Returns the schema of the table if it has been created.
+2. DescribeTable.java - Returns the schema of the table if it has been created (demonstrates two methods the API has for describing a table's schema).
 3. WriteTo.java - Writes a set of records to the WeatherStationData table.
 4. ReadRows.java - Reads a range of records (based on a time range) and outputs the rows and columns to the console.
 5. ReadAggregates.java - Reads a range of records (based on a time range) and outputs the total count of rows in the range and min, max, and average values of the temperature field.

@@ -14,6 +14,20 @@ import com.basho.riak.client.core.query.timeseries.Cell;
 import com.basho.riak.client.core.query.timeseries.QueryResult;
 import com.basho.riak.client.core.query.timeseries.Row;
 
+/***
+ * ReadArithmetic
+ * @author cvitter
+ * Demonstrates the basics of querying Riak TS simple arithmetic functions
+ * (addition, subtraction, multiplication, and division) on columns being
+ * queried
+ * 
+ * For more information see the Java Client API documentation at: 
+ * http://docs.basho.com/riakts/latest/developing/java/
+ * 
+ * Note: This example uses the WeatherStationData table created in
+ * CreateTable.java and the data written in WriteTo.hava and will fail if 
+ * that code hasn't been successfully executed against your Riak TS cluster first.
+ */
 public class ReadArithmetic {
 	public static void main(String[] args) throws UnknownHostException, ExecutionException, InterruptedException, ParseException {
 		// Create the Riak TS client to use to write data to
