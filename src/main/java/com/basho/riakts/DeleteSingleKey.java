@@ -9,6 +9,18 @@ import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.api.commands.timeseries.Delete;
 import com.basho.riak.client.core.query.timeseries.Cell;
 
+/***
+ * DeleteSingleKey
+ * @author cvitter
+ * Demonstrates the how to delete a single row from Riak TS using the primary key.
+ * 
+ * For more information see the Java Client API documentation at: 
+ * http://docs.basho.com/riakts/latest/developing/java/
+ * 
+ * Note: This example uses the WeatherStationData table created in
+ * CreateTable.java and the data written in WriteTo.hava however attempting to delete a key
+ * that doesn't exist will not throw an error
+ */
 public class DeleteSingleKey {
 	public static void main(String[] args) throws UnknownHostException, ExecutionException, InterruptedException, ParseException {
 		// Create the Riak TS client to use to write data to
@@ -22,8 +34,8 @@ public class DeleteSingleKey {
 				Arrays.asList(new Cell("Weather Station 0001"), new Cell("abc-xxx-001-001"), Cell.newTimestamp(1453225380001L));
 		
 		// Use the Delete class to pass the table name and primary key to the client to be deleted
-		// NOTE: Op will report as successful as long as no error is thrown, for example if a key doesn't exist the
-		// client will still return success
+		// NOTE: The operation will report as successful as long as no error is thrown, 
+		// if a key doesn't exist the client will still return success
 		Delete delete = new Delete.Builder("WeatherStationData", keyCells).build();
 		try {
 			client.execute(delete);	

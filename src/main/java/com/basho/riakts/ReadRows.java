@@ -79,6 +79,8 @@ public class ReadRows {
 
 			System.out.println(rowOut);
 		}
+		
+		System.out.println("Total Rows Returned: " + queryResult.getRowsCount());
 	    client.shutdown();
 	}
 

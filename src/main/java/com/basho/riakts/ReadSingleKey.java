@@ -13,6 +13,19 @@ import com.basho.riak.client.core.query.timeseries.Cell;
 import com.basho.riak.client.core.query.timeseries.QueryResult;
 import com.basho.riak.client.core.query.timeseries.Row;
 
+/***
+ * ReadSingleKey
+ * @author cvitter
+ * Demonstrates how to query Riak TS for a single row using the primary key.
+ * 
+ * For more information see the Java Client API documentation at: 
+ * http://docs.basho.com/riakts/latest/developing/java/
+ * 
+ * Note: This example uses the WeatherStationData table created in
+ * CreateTable.java and the data written in WriteTo.hava. The code will not fail
+ * if that code hasn't been successfully executed against your Riak TS cluster first 
+ * however no date will be returned in the QueryResult object.
+ */
 public class ReadSingleKey {
 	
 	public static void main(String[] args) throws UnknownHostException, ExecutionException, InterruptedException, ParseException {
@@ -24,7 +37,7 @@ public class ReadSingleKey {
 		// To fetch a single records we create a List<Cell> with a cell for the family, series and quantum 
 		// See http://docs.basho.com/riakts/latest/using/querying/#Single-Key-Fetch for more information
 		final List<Cell> keyCells = 
-				Arrays.asList(new Cell("Weather Station 0001"), new Cell("abc-xxx-001-001"), Cell.newTimestamp(1453225380000L));
+				Arrays.asList(new Cell("Weather Station 0001"), new Cell("abc-xxx-001-001"), Cell.newTimestamp(1453225440000L));
 		
 		// Use the Fetch class to pass the table name and primary key to the client
 		Fetch fetch = new Fetch.Builder("WeatherStationData", keyCells).build();
