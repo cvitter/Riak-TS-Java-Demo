@@ -69,10 +69,12 @@ public class ReadAggregates {
 			System.out.println("COUNT(*) Returns: " + rowOut);
 		}
 		
-		// TS SQL Query - Get the min, avg, and max temperature readings for the same selection of records
+		// TS SQL Query - Get the min, avg, max temperature and average humidity readings 
+		// for the same selection of records. Multiply humidity by 0.25 to demonstrate mixing
+		// aggregate and arithmetic functions in the same query.
 		// See http://docs.basho.com/riakts/latest/using/aggregate-functions/ for more
 		// information on supported aggregate functions
-		queryText = "select MIN(temperature), AVG(temperature), MAX(temperature) from WeatherStationData " +
+		queryText = "select MIN(temperature), AVG(temperature), MAX(temperature), AVG(humidity) * 0.25 from WeatherStationData " +
 				"where time > " + startDate + " and time < " + endDate + " and " +
 				"device = 'Weather Station 0001' and deviceId = 'abc-xxx-001-001'";
 		System.out.println(queryText);
@@ -96,6 +98,9 @@ public class ReadAggregates {
 				}
 				else if (cellNo==2) {
 					System.out.println("Maximum Temp: " + Utility.getCellStringVal(cell));
+				}
+				else if (cellNo==3) {
+					System.out.println("Average Humidity: " + Utility.getCellStringVal(cell) + "%");
 				}
 				cellNo++;
 			}
