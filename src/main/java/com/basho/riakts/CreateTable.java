@@ -1,7 +1,6 @@
 package com.basho.riakts;
 
 import java.net.UnknownHostException;
-import java.util.concurrent.ExecutionException;
 
 import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.api.commands.timeseries.Query;

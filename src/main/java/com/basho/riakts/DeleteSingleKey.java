@@ -31,7 +31,7 @@ public class DeleteSingleKey {
 		// To delete a single records we create a List<Cell> with a cell for the family, series and quantum 
 		// See http://docs.basho.com/riakts/latest/using/querying/#Single-Key-Fetch for more information
 		final List<Cell> keyCells = 
-				Arrays.asList(new Cell("Weather Station 0001"), new Cell("abc-xxx-001-001"), Cell.newTimestamp(1453225380001L));
+				Arrays.asList(new Cell("Weather Station 0001"), new Cell("abc-xxx-001-001"), Cell.newTimestamp(1453225490000L));
 		
 		// Use the Delete class to pass the table name and primary key to the client to be deleted
 		// NOTE: The operation will report as successful as long as no error is thrown, 

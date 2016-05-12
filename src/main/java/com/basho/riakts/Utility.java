@@ -1,7 +1,5 @@
 package com.basho.riakts;
 
-import java.util.Date;
-
 import com.basho.riak.client.core.query.timeseries.Cell;
 
 public class Utility {

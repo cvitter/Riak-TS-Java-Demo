@@ -17,7 +17,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import com.basho.riak.client.api.RiakClient;
@@ -66,7 +65,7 @@ public class ReadAggregates {
 				Cell cell = (Cell) cells.next();
 				rowOut += Utility.getCellStringVal( cell );
 			}
-			System.out.println("COUNT(*) Returns: " + rowOut);
+			System.out.println("COUNT(*) Returns: " + rowOut + "\n");
 		}
 		
 		// TS SQL Query - Get the min, avg, max temperature and average humidity readings 

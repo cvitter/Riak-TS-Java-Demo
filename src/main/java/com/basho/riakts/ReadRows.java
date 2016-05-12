@@ -5,13 +5,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.api.commands.timeseries.Query;
 import com.basho.riak.client.core.query.timeseries.Cell;
-import com.basho.riak.client.core.query.timeseries.ColumnDescription;
 import com.basho.riak.client.core.query.timeseries.QueryResult;
 import com.basho.riak.client.core.query.timeseries.Row;
 
